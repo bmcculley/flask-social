@@ -9,6 +9,7 @@ from flask_login import LoginManager, UserMixin, current_user, \
 from flask_wtf import FlaskForm
 from wtforms import Form, StringField, PasswordField, \
                         SubmitField, validators
+from wtforms.widgets import TextArea
 from flask_sqlalchemy import SQLAlchemy
 import bcrypt
 
@@ -105,7 +106,7 @@ class RegistForm(Form):
 
 
 class PostForm(Form):
-    content = StringField("Post Content", validators=[validators.DataRequired()])
+    content = StringField("Post Content", widget=TextArea(), validators=[validators.DataRequired()])
     submit = SubmitField("Submit")
 
 
@@ -134,7 +135,7 @@ def home():
 
 @app.route("/profile", methods=["GET", "POST"])
 def profile():
-    return "coming soon"
+    return render_template("profile.html")
 
 
 # register here
